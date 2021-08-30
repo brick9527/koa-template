@@ -1,0 +1,16 @@
+env:
+  commonjs: true
+  es2021: true
+  node: true
+extends: 'standard'
+parserOptions:
+  ecmaVersion: 12
+  sourceType: module
+rules:
+  # 分号
+  semi: ['error', 'always']
+  # 箭头函数
+  arrow-parens: ['error', 'as-needed']
+  quotes: ['warn', 'single']
+  # 逗号
+  comma-dangle: ['warn', 'always-multiline']

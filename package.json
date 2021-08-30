@@ -1,0 +1,59 @@
+{
+  "name": "koa-template",
+  "version": "0.1.0",
+  "description": "A project template based on koa",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "node_modules/.bin/eslint src/**/*js --cache --exit-on-fatal-error",
+    "dev": "cross-env mode=dev node src/index.js",
+    "start": "cross-env mode=prod node src/index.js",
+    "commitmsg": "validate-commit-msg"
+  },
+  "pre-commit": [
+    "lint",
+    "commitmsg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brick9527/koa-template.git"
+  },
+  "keywords": [
+    "template",
+    "koa"
+  ],
+  "author": "brick9527",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brick9527/koa-template/issues"
+  },
+  "homepage": "https://github.com/brick9527/koa-template#readme",
+  "dependencies": {
+    "@koa/router": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.10.6",
+    "joi": "^17.4.2",
+    "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-compose": "^4.1.0",
+    "koa-helmet": "^6.1.0",
+    "koa-session": "^6.2.0",
+    "lodash": "^4.17.21",
+    "log4js": "^6.3.0",
+    "mongoose": "^5.13.7",
+    "redis": "^3.1.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.1",
+    "pre-commit": "^1.2.2",
+    "prettier-eslint": "^13.0.0",
+    "validate-commit-msg": "^2.14.0"
+  }
+}

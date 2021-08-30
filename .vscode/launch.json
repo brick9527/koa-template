@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "request": "launch",
+      "name": "Server Attach",
+      "port": 3001,
+      "stopOnEntry": true,
+      "type": "node",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "skipFiles": [
+        "node_modules/**/*.js"
+      ],
+      "program": "${workspaceFolder}/src/index.js"
+    }
+  ]
+}
