@@ -22,7 +22,7 @@
     "koa"
   ],
   "author": "brick9527",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/brick9527/koa-template/issues"
   },
