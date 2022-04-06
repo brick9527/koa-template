@@ -2,6 +2,7 @@
 
 ## 目录结构
 
+```
 ├─.vscode # vscode配置文件
 └─src # 项目代码文件
     ├─config # 项目配置文件
@@ -11,7 +12,7 @@
     ├─model # modal层
     ├─routes # 路由
     └─utils # 工具
-
+```
 
 ## 代码提交规范(Commit Message Standard)
 
