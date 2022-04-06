@@ -10,6 +10,6 @@
   "maxSubjectLength": 100,
   "subjectPattern": ".+",
   "subjectPatternErrorMsg": "subject does not match subject pattern!",
-  "helpMessage": "",
+  "helpMessage": "Please read README.md -> \"Commit Message Standard\" for more infomation ",
   "autoFix": false
 }
