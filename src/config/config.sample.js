@@ -1,4 +1,7 @@
 module.exports = {
+  app: {
+    name: 'my_app', // app名称, 用于对外暴露服务
+  },
   server: {
     port: 3001, // 服务开发端口
     cookieKey: 'Your_Cookie_Key', // 用于cookie加密的秘钥
@@ -16,9 +19,9 @@ module.exports = {
     authSource: 'auth_db', // 用户认证的database
     user: 'test', // 用户名
     password: 'your_pass', // 密码
-    reconnectTries: 10, // 最大重连数
-    reconnectInterval: 1000, // 重连间隙，1s
-    poolSize: 10, // 连接池数量
+    // reconnectTries: 10, // 最大重连数
+    // reconnectInterval: 1000, // 重连间隙，1s
+    // poolSize: 10, // 连接池数量
     autoIndex: false, // 自动索引
   },
   redis: {

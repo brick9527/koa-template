@@ -1,0 +1,15 @@
+{
+  "route": {
+    "prefix": "api",
+    "pathReplace": {
+      "-": ""
+    },
+    "toLowerCase": true
+  },
+  "model": {
+    "group": "User"
+  },
+  "controller": {
+    "group": "User"
+  }
+}
