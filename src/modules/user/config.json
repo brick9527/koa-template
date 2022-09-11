@@ -1,0 +1,9 @@
+{
+  "route": {
+    "prefix": "api",
+    "pathReplace": {
+      "-": ""
+    },
+    "toLowerCase": true
+  }
+}

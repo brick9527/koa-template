@@ -6,7 +6,7 @@ const config = require('../config');
  * 连接mongodb，获取mongo客户端实例
  * @returns
  */
-module.exports = async () => {
+async function connect () {
   const processName = process.env.process_name || process.pid;
 
   try {
@@ -39,6 +39,10 @@ module.exports = async () => {
 
     const { connection } = client;
 
+    connection.on('connected', () => {
+      logger.info(`${processName} mongodb connected.`);
+    });
+
     connection.on('disconnected', () => {
       logger.warn(`${processName} mongodb disconnected.`);
     });
@@ -56,5 +60,9 @@ module.exports = async () => {
     return client;
   } catch (err) {
     logger.error(`${processName} mongodb failed.`, err);
+
+    setTimeout(connect, 1500);
   }
-};
+}
+
+module.exports = connect;
