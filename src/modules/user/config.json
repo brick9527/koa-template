@@ -5,5 +5,8 @@
       "-": ""
     },
     "toLowerCase": true
+  },
+  "model": {
+    "group": "User"
   }
 }

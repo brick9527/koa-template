@@ -1,4 +1,7 @@
 module.exports = {
+  app: {
+    name: 'my_app', // app名称, 用于对外暴露服务
+  },
   server: {
     port: 3001, // 服务开发端口
     cookieKey: 'Your_Cookie_Key', // 用于cookie加密的秘钥
