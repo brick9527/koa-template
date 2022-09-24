@@ -2,7 +2,7 @@ const log4js = require('../utils/log4js');
 const createMongoClient = require('../utils/mongodb');
 const createRedisClient = require('../utils/redis');
 const config = require('../config');
-const model = require('../model');
+const model = require('../loader/model');
 
 /**
  * 初始化上下文属性

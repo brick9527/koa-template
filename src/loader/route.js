@@ -3,8 +3,13 @@ const fs = require('fs');
 const path = require('path');
 const Router = require('@koa/router');
 
-const logger = require('../utils/log4js').getLogger('route');
+const logger = require('../utils/log4js').getLogger('route_loader');
 
+/**
+ * 格式化路由各个基础path值
+ * @param {*} config - 配置
+ * @param {Array<String>} base - 路由的基础path
+ */
 function _formatBase (config, base = []) {
   const { route = {} } = config;
   const { pathReplace = {}, toLowerCase = false } = route;
@@ -23,8 +28,17 @@ function _formatBase (config, base = []) {
   if (toLowerCase) {
     baseList = baseList.map(baseItem => baseItem.toLowerCase());
   }
+
+  return baseList;
 }
 
+/**
+ * 递归加载路由
+ * @param {koa.Router} router - router实例
+ * @param {String} modulePath - 模块路径
+ * @param {String} folderPath - (路由)文件夹路径
+ * @param {Array<String>} base - 路由基础path值
+ */
 function _loadRoute (router, modulePath, folderPath, base = []) {
   const fileList = fs.readdirSync(folderPath);
 
@@ -43,7 +57,6 @@ function _loadRoute (router, modulePath, folderPath, base = []) {
           routeBaseList.push(name);
         }
         const formattedRouteBase = _formatBase(config, routeBaseList);
-
         const routeBaseStr = formattedRouteBase.join('/');
         logger.debug(`load route. base: /${routeBaseStr}, file: ${filePath}`);
         require(filePath)(router, routeBaseStr);
