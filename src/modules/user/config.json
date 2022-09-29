@@ -8,5 +8,8 @@
   },
   "model": {
     "group": "User"
+  },
+  "controller": {
+    "group": "User"
   }
 }

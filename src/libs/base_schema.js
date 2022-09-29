@@ -10,6 +10,15 @@ class MongoBaseSchema extends mongoose.Schema {
       },
     };
     const opts = _.defaultsDeep(options, timestampOptions);
+
+    // 所有表添加软删除字段
+    schema.isDeleted = {
+      type: Boolean,
+      required: true,
+      index: true,
+      default: false,
+    };
+
     super(schema, opts);
 
     // 注册中间件
