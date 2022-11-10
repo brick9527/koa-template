@@ -1,4 +1,5 @@
 # TODO
 
 - [x] 添加model加载器
+- [x] 添加controller加载器
 - [ ] 添加service加载器

@@ -1,4 +1,4 @@
-const MongoBaseSchema = require('./mongo.base_schema');
+const MongoBaseSchema = require('../libs/base_schema');
 
 const userSchema = new MongoBaseSchema({
   name: {
