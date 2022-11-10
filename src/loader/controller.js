@@ -4,7 +4,14 @@ const _ = require('lodash');
 
 const logger = require('../utils/log4js').getLogger('controller_loader');
 
-// TODO: 递归加载
+function _getPureFileName (fileName) {
+  return fileName.split('.').slice(0, -1).join('.');
+}
+
+/**
+ * 控制器加载器
+ * @returns {Object}
+ */
 function controllerLoader () {
   const moduleFolderPath = path.join(__dirname, '../modules');
   const moduleFileList = fs.readdirSync(moduleFolderPath);
@@ -15,26 +22,34 @@ function controllerLoader () {
     const { controller: controllerConfig } = require(configPath);
 
     if (!fs.existsSync(controllerPath)) {
-      return controllerPath;
+      return controllerMap;
     }
 
-    // 且该文件是个文件夹
-    const fileStat = fs.statSync(controllerMap);
+    // 该文件是个文件
+    const fileStat = fs.statSync(controllerPath);
     if (!fileStat.isDirectory()) {
       return controllerMap;
     }
 
     const controllerGroup = _.get(controllerConfig, 'group') || moduleFileName;
-    if (!controllerMap[controllerGroup]) {
-      controllerMap[controllerGroup] = {};
+    const controllerGroupDisplayName = `${controllerGroup}Controller`;
+    if (!controllerMap[controllerGroupDisplayName]) {
+      controllerMap[controllerGroupDisplayName] = {};
     }
 
-    const modelFileNameList = fs.readdirSync(controllerGroup);
-    for (const modelFileName of modelFileNameList) {
-      const controllerFilePath = path.join(controllerGroup, modelFileName);
+    const controllerFileNameList = fs.readdirSync(controllerPath);
+    for (const controllerFileName of controllerFileNameList) {
+      const controllerFilePath = path.join(controllerPath, controllerFileName);
+      const controllerFileStat = fs.statSync(controllerFilePath);
+      if (controllerFileStat.isDirectory()) {
+        continue;
+      }
+
+      const pureFileName = _getPureFileName(controllerFileName);
+      const propertyName = pureFileName === 'index' ? 'default' : pureFileName;
       const controller = require(controllerFilePath);
-      logger.debug(`load controller ${controllerGroup}:${modelFileName}. path: ${controllerFilePath}`);
-      controllerMap[controllerGroup][modelFileName] = controller;
+      logger.debug(`load controller ${controllerGroupDisplayName}.${propertyName}. path: ${controllerFilePath}`);
+      controllerMap[controllerGroupDisplayName][propertyName] = controller;
     }
 
     return controllerMap;
@@ -43,4 +58,4 @@ function controllerLoader () {
   return controllerMap;
 }
 
-module.exports = controllerLoader;
+module.exports = controllerLoader();

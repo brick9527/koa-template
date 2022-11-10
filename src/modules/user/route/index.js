@@ -1,9 +1,8 @@
 const Joi = require('joi');
-const test = require('../../../controller/test');
 const validate = require('../../../middlewares/validate');
 
-module.exports = (router, base) => {
-  router.get(`/${base}/index`, test.index);
+module.exports = (router, base, ctx) => {
+  router.get(`/${base}/index`, ctx.controller.UserController.test.index);
 
   router.post(
     `/${base}/add`,
@@ -12,8 +11,8 @@ module.exports = (router, base) => {
         name: Joi.string().required().default('abc').description('姓名'),
       }),
     }),
-    test.add,
+    ctx.controller.UserController.test.add,
   );
 
-  router.get(`/${base}/get`, test.get);
+  router.get(`/${base}/get`, ctx.controller.UserController.test.get);
 };

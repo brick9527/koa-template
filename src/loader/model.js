@@ -32,7 +32,14 @@ function modelLoader () {
     for (const modelFileName of modelFileNameList) {
       const modelFilePath = path.join(modelPath, modelFileName);
       const model = require(modelFilePath);
-      logger.debug(`load model ${modelGroup}:${model.modelName}. path: ${modelFilePath}`);
+      model.ensureIndexes(err => {
+        if (err) {
+          logger.error(err);
+          return;
+        }
+        logger.debug(`ensure indexes of ${modelGroup}.${model.modelName}.`);
+      });
+      logger.debug(`load model ${modelGroup}.${model.modelName}. path: ${modelFilePath}`);
       modelMap[modelGroup][model.modelName] = model;
     }
 

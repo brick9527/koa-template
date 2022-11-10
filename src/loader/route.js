@@ -38,8 +38,9 @@ function _formatBase (config, base = []) {
  * @param {String} modulePath - 模块路径
  * @param {String} folderPath - (路由)文件夹路径
  * @param {Array<String>} base - 路由基础path值
+ * @param {koa.App} app - app实例
  */
-function _loadRoute (router, modulePath, folderPath, base = []) {
+function _loadRoute (router, modulePath, folderPath, base = [], ctx, app) {
   const fileList = fs.readdirSync(folderPath);
 
   fileList.forEach(fileName => {
@@ -59,7 +60,7 @@ function _loadRoute (router, modulePath, folderPath, base = []) {
         const formattedRouteBase = _formatBase(config, routeBaseList);
         const routeBaseStr = formattedRouteBase.join('/');
         logger.debug(`load route. base: /${routeBaseStr}, file: ${filePath}`);
-        require(filePath)(router, routeBaseStr);
+        require(filePath)(router, routeBaseStr, ctx, app);
       } catch (err) {
         logger.error(`load route failed. file: ${filePath}. ${err}`);
       }
@@ -69,9 +70,9 @@ function _loadRoute (router, modulePath, folderPath, base = []) {
       // 是一个文件夹, 继续递归
       const { name } = path.parse(filePath);
       if (name === 'index') {
-        _loadRoute(router, modulePath, filePath, [...base]);
+        _loadRoute(router, modulePath, filePath, [...base], ctx, app);
       } else {
-        _loadRoute(router, modulePath, filePath, [...base, name]);
+        _loadRoute(router, modulePath, filePath, [...base, name], ctx, app);
       }
     }
   });
@@ -94,7 +95,7 @@ module.exports = app => {
     }
 
     const targetFilePath = path.join(moduleItemFilePath, existsRouteFileName);
-    _loadRoute(router, moduleItemFilePath, targetFilePath, [name]);
+    _loadRoute(router, moduleItemFilePath, targetFilePath, [name], app.context, app);
   }
 
   app.use(router.routes())
