@@ -4,7 +4,7 @@ const Koa = require('koa');
 const koaCompose = require('koa-compose');
 const koaHelmet = require('koa-helmet');
 const koaSession = require('koa-session');
-const koaBody = require('koa-body');
+const { koaBody } = require('koa-body');
 
 // const routeLoader = require('./libs/route_loader');
 const routeLoader = require('./loader/route');
