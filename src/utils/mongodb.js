@@ -18,8 +18,6 @@ async function connect () {
       authSource,
       user,
       password,
-      reconnectTries = 10,
-      reconnectInterval = 1000,
       poolSize = 10,
       autoIndex = false,
     } = mongodb;
@@ -29,11 +27,9 @@ async function connect () {
       authSource,
       user,
       pass: password,
-      autoReconnect: true,
-      reconnectTries,
-      reconnectInterval,
-      poolSize,
+      maxPoolSize: poolSize,
       autoIndex,
+      serverSelectionTimeoutMS: 5000,
       useNewUrlParser: true,
     });
 
@@ -60,8 +56,7 @@ async function connect () {
     return client;
   } catch (err) {
     logger.error(`${processName} mongodb failed.`, err);
-
-    setTimeout(connect, 1500);
+    setTimeout(connect, 5000);
   }
 }
 
