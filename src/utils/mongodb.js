@@ -6,7 +6,7 @@ const config = require('../config');
  * 连接mongodb，获取mongo客户端实例
  * @returns
  */
-module.exports = async () => {
+async function connect () {
   const processName = process.env.process_name || process.pid;
 
   try {
@@ -15,29 +15,33 @@ module.exports = async () => {
       host,
       port,
       dbName,
-      authSource,
+      // authSource,
       user,
       password,
-      reconnectTries = 10,
-      reconnectInterval = 1000,
-      poolSize = 10,
+      // reconnectTries = 10,
+      // reconnectInterval = 1000,
+      // poolSize = 10,
       autoIndex = false,
     } = mongodb;
 
     const client = await mongoose.connect(`mongodb://${host}:${port}`, {
       dbName,
-      authSource,
+      // authSource,
       user,
       pass: password,
-      autoReconnect: true,
-      reconnectTries,
-      reconnectInterval,
-      poolSize,
+      // autoReconnect: true,
+      // reconnectTries,
+      // reconnectInterval,
+      // poolSize,
       autoIndex,
-      useNewUrlParser: true,
+      // useNewUrlParser: true,
     });
 
     const { connection } = client;
+
+    connection.on('connected', () => {
+      logger.info(`${processName} mongodb connected.`);
+    });
 
     connection.on('disconnected', () => {
       logger.warn(`${processName} mongodb disconnected.`);
@@ -56,5 +60,9 @@ module.exports = async () => {
     return client;
   } catch (err) {
     logger.error(`${processName} mongodb failed.`, err);
+
+    setTimeout(connect, 1500);
   }
-};
+}
+
+module.exports = connect;

@@ -3,6 +3,11 @@
     "source.fixAll.eslint": false
   },
   "[javascript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "cSpell.words": [
+    "appenders",
+    "commitmsg"
+  ],
+  "marscode.chatLanguage": "cn"
 }

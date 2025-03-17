@@ -6,7 +6,8 @@ const koaHelmet = require('koa-helmet');
 const koaSession = require('koa-session');
 const koaBody = require('koa-body');
 
-const routeLoader = require('./libs/route_loader');
+// const routeLoader = require('./libs/route_loader');
+const routeLoader = require('./loader/route');
 const { server = {} } = require('./config');
 const accessLogger = require('./middlewares/access_logger');
 const initContext = require('./libs/init_context');

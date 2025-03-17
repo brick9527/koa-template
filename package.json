@@ -7,12 +7,9 @@
     "lint": "node_modules/.bin/eslint src --cache --exit-on-fatal-error",
     "dev": "cross-env mode=dev node src/index.js",
     "start": "cross-env mode=prod node src/index.js",
-    "commitmsg": "validate-commit-msg"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
-  "pre-commit": [
-    "lint",
-    "commitmsg"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brick9527/koa-template.git"
@@ -32,25 +29,27 @@
     "cross-env": "^7.0.3",
     "joi": "^17.4.2",
     "js-yaml": "^4.1.0",
-    "koa": "^2.13.1",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.16.0",
     "koa-body": "^4.2.0",
     "koa-compose": "^4.1.0",
     "koa-helmet": "^6.1.0",
     "koa-session": "^6.2.0",
     "lodash": "^4.17.21",
     "log4js": "^6.4.4",
-    "mongoose": "^5.13.7",
-    "redis": "^3.1.2"
+    "mongoose": "^8.12.1",
+    "redis": "^3.1.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "husky": "^7.0.1",
-    "pre-commit": "^1.2.2",
-    "prettier-eslint": "^13.0.0",
-    "validate-commit-msg": "^2.14.0"
+    "husky": "^9.1.7",
+    "prettier-eslint": "^13.0.0"
   }
 }
