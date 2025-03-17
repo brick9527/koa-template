@@ -4,7 +4,7 @@
   "description": "A project template based on koa",
   "main": "src/index.js",
   "scripts": {
-    "lint": "node_modules/.bin/eslint src --cache --exit-on-fatal-error",
+    "lint": "eslint src",
     "dev": "cross-env mode=dev node src/index.js",
     "start": "cross-env mode=prod node src/index.js",
     "prepare": "husky",
@@ -44,11 +44,9 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "eslint": "^7.32.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "@eslint/js": "^9.22.0",
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0",
     "husky": "^9.1.7",
     "prettier-eslint": "^13.0.0"
   }
